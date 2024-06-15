@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, VStack, Button, Input, Table, Thead, Tbody, Tr, Th, Td, IconButton } from "@chakra-ui/react";
+import { Container, VStack, Button, Input, Table, Thead, Tbody, Tr, Th, Td, IconButton, Box, Heading, Flex, Spacer } from "@chakra-ui/react";
 import { FaTrash, FaPlus } from "react-icons/fa";
 import Papa from "papaparse";
 import { CSVLink } from "react-csv";
@@ -37,8 +37,10 @@ const Index = () => {
   };
 
   return (
-    <Container centerContent maxW="container.xl" py={10}>
+    <Box bg="gray.50" minH="100vh" py={10}>
+      <Container centerContent maxW="container.xl" py={10}>
       <VStack spacing={4} width="100%">
+        <Heading as="h1" size="xl" mb={6}>CSV Upload and Edit Tool</Heading>
         <Input type="file" accept=".csv" onChange={handleFileUpload} />
         {data.length > 0 && (
           <>
@@ -73,16 +75,19 @@ const Index = () => {
                 ))}
               </Tbody>
             </Table>
-            <Button leftIcon={<FaPlus />} onClick={handleAddRow}>
-              Add Row
-            </Button>
-            <CSVLink data={data} headers={headers} filename={"edited_data.csv"}>
-              <Button>Download CSV</Button>
-            </CSVLink>
+            <Flex width="100%" justifyContent="space-between" mt={4}>
+              <Button leftIcon={<FaPlus />} onClick={handleAddRow}>
+                Add Row
+              </Button>
+              <CSVLink data={data} headers={headers} filename={"edited_data.csv"}>
+                <Button>Download CSV</Button>
+              </CSVLink>
+            </Flex>
           </>
         )}
       </VStack>
     </Container>
+  </Box>
   );
 };
 
